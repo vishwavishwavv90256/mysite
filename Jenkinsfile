@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'grep "<h9>" index.html'
+        sh 'grep "<h1>" index.html'
       }
     }
     stage('Deploy') {
