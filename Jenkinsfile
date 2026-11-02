@@ -1,25 +1,16 @@
 pipeline {
   agent any
   stages {
-    stage('Get code') {
-      steps {
-        echo 'Code received from GitHub'
-      }
-    }
     stage('Build') {
-      steps {
-        sh 'ls'
-        sh 'cat index.html'
-      }
+      steps { sh 'docker build -t mysite .' }
     }
     stage('Test') {
-      steps {
-        sh 'grep "<h1>" index.html'
-      }
+      steps { sh 'grep "<h1>" index.html' }
     }
     stage('Deploy') {
       steps {
-        echo 'Deploying website...'
+        sh 'docker rm -f mysite || true'
+        sh 'docker run -d -p 80:80 --name mysite mysite'
       }
     }
   }
