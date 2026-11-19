@@ -6,7 +6,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh 'docker rm -f mysite || true'
-        sh 'docker run -d -p 80:80 --name mysite mysite'
+        sh 'docker run -d -p 81:80 --name mysite mysite'
       }
     }
   }
