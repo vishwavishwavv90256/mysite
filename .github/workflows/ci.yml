@@ -1,0 +1,16 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Test
+        run: grep "<h1>" index.html
+      - name: Build Docker image
+        run: docker build -t mysite .
+      - name: Done
+        run: echo "Pipeline finished"
